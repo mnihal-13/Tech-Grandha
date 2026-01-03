@@ -147,14 +147,14 @@
           stepPrevBtnClass: 'rbt-step-btn-prev',
           stepNextBtnClass: 'rbt-step-btn-next',
         };
-      
+
         // Function to remove classes
         const removeClasses = (elemSet, className) => {
           elemSet.forEach(elem => {
             elem.classList.remove(className);
           });
         };
-      
+
         // Find parent of an element
         const findParent = (elem, parentClass) => {
           let currentNode = elem;
@@ -163,12 +163,12 @@
           }
           return currentNode;
         };
-      
+
         // Get active step
         const getActiveStep = elem => {
           return Array.from(DOMstrings.stepsBtns).indexOf(elem);
         };
-      
+
         // Set active step
         const setActiveStep = activeStepNum => {
           removeClasses(DOMstrings.stepsBtns, 'rbt-active');
@@ -178,7 +178,7 @@
             }
           });
         };
-      
+
         // Get active panel
         const getActivePanel = () => {
           let activePanel;
@@ -189,7 +189,7 @@
           });
           return activePanel;
         };
-      
+
         // Set active panel
         const setActivePanel = activePanelNum => {
           removeClasses(DOMstrings.stepFormPanels, 'rbt-active');
@@ -199,27 +199,27 @@
             }
           });
         };
-      
+
         // Add event listener to stepsBar
         if (DOMstrings.stepsBar) {
           DOMstrings.stepsBar.addEventListener('click', e => {
             const eventTarget = e.target;
-      
+
             if (!eventTarget.classList.contains(DOMstrings.stepsBtnClass)) {
               return;
             }
-      
+
             const activeStep = getActiveStep(eventTarget);
             setActiveStep(activeStep);
             setActivePanel(activeStep);
           });
         }
-      
+
         // Add event listener to stepsForm
         if (DOMstrings.stepsForm) {
           DOMstrings.stepsForm.addEventListener('click', e => {
             const eventTarget = e.target;
-      
+
             if (
               !(
                 eventTarget.classList.contains(DOMstrings.stepPrevBtnClass) ||
@@ -228,21 +228,21 @@
             ) {
               return;
             }
-      
+
             const activePanel = findParent(eventTarget, DOMstrings.stepFormPanelClass);
             let activePanelNum = Array.from(DOMstrings.stepFormPanels).indexOf(activePanel);
-      
+
             if (eventTarget.classList.contains(DOMstrings.stepPrevBtnClass)) {
               activePanelNum--;
             } else {
               activePanelNum++;
             }
-      
+
             setActiveStep(activePanelNum);
             setActivePanel(activePanelNum);
           });
         }
-      });      
+      });
     },
 
     cursorFollow: function () {
@@ -251,32 +251,32 @@
       const cursorFollower = document.getElementById("cursorFollower");
       const container = document.querySelector(".cf_boundary");
 
-      if(container) {
+      if (container) {
         document.addEventListener("mousemove", (e) => {
           const rect = container.getBoundingClientRect();
-          
+
           mouseX = e.clientX - rect.left;
           mouseY = e.clientY - rect.top;
-  
+
           const maxX = rect.width - cursorFollower.offsetWidth / 2;
           const maxY = rect.height - cursorFollower.offsetHeight / 2;
           const minX = cursorFollower.offsetWidth / 2;
           const minY = cursorFollower.offsetHeight / 2;
-  
+
           mouseX = Math.max(minX, Math.min(mouseX, maxX));
           mouseY = Math.max(minY, Math.min(mouseY, maxY));
         });
-  
+
         function animateCursor() {
           xp += (mouseX - xp) * 0.1;
           yp += (mouseY - yp) * 0.1;
-  
+
           cursorFollower.style.left = `${xp}px`;
           cursorFollower.style.top = `${yp}px`;
-  
+
           requestAnimationFrame(animateCursor);
         }
-  
+
         animateCursor();
       }
 
@@ -936,12 +936,25 @@
 
     counterUp: function () {
       var odo = $(".odometer");
-      odo.each(function () {
-        $(".odometer").appear(function (e) {
-          var countNumber = $(this).attr("data-count");
-          $(this).html(countNumber);
+      if (odo.length) {
+        var observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              var el = $(entry.target);
+              var countNumber = el.attr("data-count");
+              el.html(countNumber);
+              observer.unobserve(entry.target);
+            }
+          });
+        }, {
+          threshold: 0.5,
+          rootMargin: "0px"
         });
-      });
+
+        odo.each(function () {
+          observer.observe(this);
+        });
+      }
     },
 
     pricingPlan: function () {
@@ -1289,7 +1302,7 @@
     },
 
     selectPicker: function () {
-      $("select").selectpicker();
+      $("select").not(".country-code-select select, .select-wrapper select").selectpicker();
     },
 
     filterClickButton: function () {
@@ -1308,9 +1321,9 @@
       });
       $("#amount").val(
         "$" +
-          $("#slider-range").slider("values", 0) +
-          " - $" +
-          $("#slider-range").slider("values", 1)
+        $("#slider-range").slider("values", 0) +
+        " - $" +
+        $("#slider-range").slider("values", 1)
       );
     },
 

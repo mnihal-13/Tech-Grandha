@@ -1,0 +1,490 @@
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <title>Tech Grandha</title>
+    <meta name="robots" content="noindex, follow">
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/x-icon" href="/assets/images/favicon.png">
+
+    <!-- CSS  -->
+    <link rel="stylesheet" href="/assets/css/vendor/bootstrap.min.css">
+    <link rel="stylesheet" href="/assets/css/vendor/slick.css">
+    <link rel="stylesheet" href="/assets/css/vendor/slick-theme.css">
+    <link rel="stylesheet" href="/assets/css/plugins/sal.css">
+    <link rel="stylesheet" href="/assets/css/plugins/feather.css">
+    <link rel="stylesheet" href="/assets/css/plugins/fontawesome.min.css">
+    <link rel="stylesheet" href="/assets/css/plugins/euclid-circulara.css">
+    <link rel="stylesheet" href="/assets/css/plugins/swiper.css">
+    <link rel="stylesheet" href="/assets/css/plugins/odometer.css">
+    <link rel="stylesheet" href="/assets/css/plugins/animation.css">
+    <link rel="stylesheet" href="/assets/css/plugins/bootstrap-select.min.css">
+    <link rel="stylesheet" href="/assets/css/plugins/jquery-ui.css">
+    <link rel="stylesheet" href="/assets/css/plugins/magnigy-popup.min.css">
+    <link rel="stylesheet" href="/assets/css/plugins/plyr.css">
+    <link rel="stylesheet" href="/assets/css/plugins/jodit.min.css">
+
+    <link rel="stylesheet" href="/assets/css/styles.css">
+</head>
+
+<body>
+    <!-- Header Component -->
+    <div id="header-component"></div>
+
+    <main>
+
+        <!-- Modern Login Section -->
+        <div class="login-page-wrapper mb_lp--100">
+            <div class="login-container">
+                <!-- Left Side - Decorative/Image Section -->
+                <div class="login-image-side">
+                    <div class="login-image-content">
+                        <!-- Floating decorative elements -->
+                        <div class="floating-shapes">
+                            <div class="shape shape-1"></div>
+                            <div class="shape shape-2"></div>
+                            <div class="shape shape-3"></div>
+                            <div class="shape shape-4"></div>
+                        </div>
+
+                        <!-- Brand Section -->
+                        <div class="login-brand">
+                            <img src="/assets/images/tg-logo.png" alt="Tech Grandha" class="brand-logo">
+                        </div>
+
+                        <!-- Illustration/Visual -->
+                        <div class="login-illustration">
+                            <img src="/assets/images/banner/banner-01.png" alt="Learning Illustration"
+                                class="illustration-img">
+                        </div>
+
+                        <!-- Welcome Text -->
+                        <div class="login-welcome-text">
+                            <h2>Welcome Back!</h2>
+                            <p>Login to access your coding courses, track your progress, and continue your learning
+                                journey.</p>
+                        </div>
+
+                        <!-- Stats/Features -->
+                        <div class="login-features">
+                            <div class="feature-item">
+                                <i class="feather-book-open"></i>
+                                <span>50+ Courses</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="feather-users"></i>
+                                <span>10K+ Students</span>
+                            </div>
+                            <div class="feature-item">
+                                <i class="feather-award"></i>
+                                <span>Expert Teachers</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Side - Login Form Section -->
+                <div class="login-form-side">
+                    <div class="login-form-wrapper">
+                        <!-- Form Header -->
+                        <div class="login-form-header">
+                            <h3 class="login-title">Login</h3>
+                            <p class="login-subtitle">Welcome back! Please enter your details.</p>
+                        </div>
+
+                        <!-- Login Method Toggle -->
+                        <div class="login-method-toggle">
+                            <button type="button" class="toggle-btn active" data-method="otp"
+                                onclick="switchLoginMethod('otp')">
+                                <i class="feather-smartphone"></i>
+                                <span>WhatsApp OTP</span>
+                            </button>
+                            <button type="button" class="toggle-btn" data-method="password"
+                                onclick="switchLoginMethod('password')">
+                                <i class="feather-lock"></i>
+                                <span>Password</span>
+                            </button>
+                        </div>
+
+                        <!-- OTP Login Form -->
+                        <form class="modern-login-form" id="otp-login-form">
+                            <!-- Phone Number Input with Country Code -->
+                            <div class="modern-input-group">
+                                <label for="login-phone">WhatsApp Phone Number</label>
+                                <div class="phone-input-wrapper">
+                                    <div class="country-code-select">
+                                        <img src="https://flagcdn.com/w20/in.png" alt="India" class="country-flag">
+                                        <select name="country_code" id="login-country-code">
+                                            <option value="+91">+91</option>
+                                            <option value="+1">+1</option>
+                                            <option value="+44">+44</option>
+                                            <option value="+971">+971</option>
+                                            <option value="+65">+65</option>
+                                            <option value="+61">+61</option>
+                                        </select>
+                                    </div>
+                                    <input type="tel" id="login-phone" name="phone" placeholder="Enter phone number"
+                                        required>
+                                </div>
+                            </div>
+
+                            <!-- OTP Input (hidden initially, shown after Send OTP) -->
+                            <div class="modern-input-group otp-input-group" id="otp-input-group" style="display: none;">
+                                <label for="login-otp">Enter OTP</label>
+                                <div class="otp-input-container">
+                                    <input type="text" maxlength="1" class="otp-box" data-index="0">
+                                    <input type="text" maxlength="1" class="otp-box" data-index="1">
+                                    <input type="text" maxlength="1" class="otp-box" data-index="2">
+                                    <input type="text" maxlength="1" class="otp-box" data-index="3">
+                                    <input type="text" maxlength="1" class="otp-box" data-index="4">
+                                    <input type="text" maxlength="1" class="otp-box" data-index="5">
+                                </div>
+                                <div class="otp-timer">
+                                    <span id="otp-timer-text">Resend OTP in <strong id="countdown">30</strong>s</span>
+                                    <button type="button" class="resend-otp-btn" id="resend-otp-btn"
+                                        style="display: none;" onclick="sendOTP()">Resend OTP</button>
+                                </div>
+                            </div>
+
+                            <!-- Send OTP / Verify OTP Button -->
+                            <button type="button" class="login-submit-btn" id="otp-action-btn"
+                                onclick="handleOTPAction()">
+                                <span class="btn-text" id="otp-btn-text">Send OTP</span>
+                                <span class="btn-icon"><i class="feather-arrow-right"></i></span>
+                            </button>
+
+                            <!-- Divider -->
+                            <div class="login-divider">
+                                <span>Or Continue With</span>
+                            </div>
+
+                            <!-- Social Login -->
+                            <div class="social-login-buttons">
+                                <button type="button" class="social-btn google-btn">
+                                    <svg viewBox="0 0 24 24" width="20" height="20">
+                                        <path fill="#4285F4"
+                                            d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                                        <path fill="#34A853"
+                                            d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                                        <path fill="#FBBC05"
+                                            d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
+                                        <path fill="#EA4335"
+                                            d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
+                                    </svg>
+                                    <span>Google</span>
+                                </button>
+                                <button type="button" class="social-btn facebook-btn">
+                                    <i class="feather-facebook"></i>
+                                    <span>Facebook</span>
+                                </button>
+                                <button type="button" class="social-btn apple-btn">
+                                    <i class="fa fa-apple"></i>
+                                    <span>Apple</span>
+                                </button>
+                            </div>
+
+                            <!-- Sign Up Link -->
+                            <p class="signup-prompt">
+                                Don't have an account? <a href="/register.html" class="signup-link">Sign Up here</a>
+                            </p>
+                        </form>
+
+                        <!-- Password Login Form (hidden initially) -->
+                        <form class="modern-login-form" id="password-login-form" style="display: none;">
+                            <!-- Email Input -->
+                            <div class="modern-input-group">
+                                <label for="login-email">Email</label>
+                                <div class="input-wrapper">
+                                    <i class="feather-mail input-icon"></i>
+                                    <input type="email" id="login-email" name="email" placeholder="Enter your email"
+                                        required>
+                                </div>
+                            </div>
+
+                            <!-- Password Input -->
+                            <div class="modern-input-group">
+                                <label for="login-password">Password</label>
+                                <div class="input-wrapper">
+                                    <i class="feather-lock input-icon"></i>
+                                    <input type="password" id="login-password" name="password"
+                                        placeholder="Enter your password" required>
+                                    <button type="button" class="password-toggle" onclick="togglePassword()">
+                                        <i class="feather-eye" id="toggleIcon"></i>
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Remember Me & Forgot Password -->
+                            <div class="login-options">
+                                <label class="modern-checkbox">
+                                    <input type="checkbox" name="remember">
+                                    <span class="checkmark"></span>
+                                    <span class="checkbox-label">Remember me</span>
+                                </label>
+                                <a href="#" class="forgot-password-link">Forgot Password?</a>
+                            </div>
+
+                            <!-- Login Button -->
+                            <button type="submit" class="login-submit-btn">
+                                <span class="btn-text">Log In</span>
+                                <span class="btn-icon"><i class="feather-arrow-right"></i></span>
+                            </button>
+
+                            <!-- Divider -->
+                            <div class="login-divider">
+                                <span>Or Continue With</span>
+                            </div>
+
+                            <!-- Social Login -->
+                            <div class="social-login-buttons">
+                                <button type="button" class="social-btn google-btn">
+                                    <svg viewBox="0 0 24 24" width="20" height="20">
+                                        <path fill="#4285F4"
+                                            d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
+                                        <path fill="#34A853"
+                                            d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
+                                        <path fill="#FBBC05"
+                                            d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
+                                        <path fill="#EA4335"
+                                            d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
+                                    </svg>
+                                    <span>Google</span>
+                                </button>
+                                <button type="button" class="social-btn facebook-btn">
+                                    <i class="feather-facebook"></i>
+                                    <span>Facebook</span>
+                                </button>
+                                <button type="button" class="social-btn apple-btn">
+                                    <i class="fa fa-apple"></i>
+                                    <span>Apple</span>
+                                </button>
+                            </div>
+
+                            <!-- Sign Up Link -->
+                            <p class="signup-prompt">
+                                Don't have an account? <a href="/register.html" class="signup-link">Sign Up here</a>
+                            </p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Login Scripts -->
+        <script>
+            // Toggle password visibility
+            function togglePassword() {
+                const passwordInput = document.getElementById('login-password');
+                const toggleIcon = document.getElementById('toggleIcon');
+                if (passwordInput.type === 'password') {
+                    passwordInput.type = 'text';
+                    toggleIcon.classList.remove('feather-eye');
+                    toggleIcon.classList.add('feather-eye-off');
+                } else {
+                    passwordInput.type = 'password';
+                    toggleIcon.classList.remove('feather-eye-off');
+                    toggleIcon.classList.add('feather-eye');
+                }
+            }
+
+            // Switch login method
+            function switchLoginMethod(method) {
+                const otpForm = document.getElementById('otp-login-form');
+                const passwordForm = document.getElementById('password-login-form');
+                const toggleBtns = document.querySelectorAll('.toggle-btn');
+
+                toggleBtns.forEach(btn => {
+                    btn.classList.remove('active');
+                    if (btn.dataset.method === method) {
+                        btn.classList.add('active');
+                    }
+                });
+
+                if (method === 'otp') {
+                    otpForm.style.display = 'block';
+                    passwordForm.style.display = 'none';
+                } else {
+                    otpForm.style.display = 'none';
+                    passwordForm.style.display = 'block';
+                }
+            }
+
+            // OTP state
+            let otpSent = false;
+            let countdownInterval = null;
+
+            // Handle OTP action (Send or Verify)
+            function handleOTPAction() {
+                if (!otpSent) {
+                    sendOTP();
+                } else {
+                    verifyOTP();
+                }
+            }
+
+            // Send OTP
+            function sendOTP() {
+                const phone = document.getElementById('login-phone').value;
+                if (!phone) {
+                    alert('Please enter your phone number');
+                    return;
+                }
+
+                // Show OTP input
+                document.getElementById('otp-input-group').style.display = 'block';
+                document.getElementById('otp-btn-text').textContent = 'Verify OTP';
+                otpSent = true;
+
+                // Start countdown
+                startCountdown(30);
+
+                // Focus first OTP box
+                document.querySelector('.otp-box').focus();
+            }
+
+            // Start countdown timer
+            function startCountdown(seconds) {
+                let remaining = seconds;
+                const countdownEl = document.getElementById('countdown');
+                const timerText = document.getElementById('otp-timer-text');
+                const resendBtn = document.getElementById('resend-otp-btn');
+
+                timerText.style.display = 'inline';
+                resendBtn.style.display = 'none';
+
+                countdownInterval = setInterval(() => {
+                    remaining--;
+                    countdownEl.textContent = remaining;
+
+                    if (remaining <= 0) {
+                        clearInterval(countdownInterval);
+                        timerText.style.display = 'none';
+                        resendBtn.style.display = 'inline';
+                    }
+                }, 1000);
+            }
+
+            // Verify OTP
+            function verifyOTP() {
+                const otpBoxes = document.querySelectorAll('.otp-box');
+                let otp = '';
+                otpBoxes.forEach(box => otp += box.value);
+
+                if (otp.length !== 6) {
+                    alert('Please enter the complete 6-digit OTP');
+                    return;
+                }
+
+                // Here you would verify the OTP with your backend
+                console.log('Verifying OTP:', otp);
+                alert('OTP Verified! (Demo)');
+            }
+
+            // OTP box auto-focus
+            document.querySelectorAll('.otp-box').forEach((box, index, boxes) => {
+                box.addEventListener('input', (e) => {
+                    if (e.target.value && index < boxes.length - 1) {
+                        boxes[index + 1].focus();
+                    }
+                });
+
+                box.addEventListener('keydown', (e) => {
+                    if (e.key === 'Backspace' && !e.target.value && index > 0) {
+                        boxes[index - 1].focus();
+                    }
+                });
+            });
+        </script>
+
+
+
+
+
+
+
+
+    </main>
+
+    <!-- Footer Component -->
+    <div id="footer-component"></div>
+
+    <!-- js -->
+    <script src="/assets/js/vendor/modernizr.min.js"></script>
+    <script src="/assets/js/vendor/jquery.js"></script>
+    <script src="/assets/js/vendor/bootstrap.min.js"></script>
+    <script src="/assets/js/vendor/sal.js"></script>
+    <script src="/assets/js/vendor/js.cookie.js"></script>
+    <script src="/assets/js/vendor/jquery.style.switcher.js"></script>
+    <script src="/assets/js/vendor/swiper.js"></script>
+    <script src="/assets/js/vendor/jquery-appear.js"></script>
+    <script src="/assets/js/vendor/odometer.js"></script>
+    <script src="/assets/js/vendor/backtotop.js"></script>
+    <script src="/assets/js/vendor/isotop.js"></script>
+    <script src="/assets/js/vendor/imageloaded.js"></script>
+    <script src="/assets/js/vendor/wow.js"></script>
+    <script src="/assets/js/vendor/waypoint.min.js"></script>
+    <script src="/assets/js/vendor/easypie.js"></script>
+    <script src="/assets/js/vendor/text-type.js"></script>
+    <script src="/assets/js/vendor/jquery-one-page-nav.js"></script>
+    <script src="/assets/js/vendor/bootstrap-select.min.js"></script>
+    <script src="/assets/js/vendor/jquery-ui.js"></script>
+    <script src="/assets/js/vendor/magnify-popup.min.js"></script>
+    <script src="/assets/js/vendor/paralax-scroll.js"></script>
+    <script src="/assets/js/vendor/paralax.min.js"></script>
+    <script src="/assets/js/vendor/countdown.js"></script>
+    <script src="/assets/js/vendor/plyr.js"></script>
+    <script src="/assets/js/vendor/jodit.min.js"></script>
+    <script src="/assets/js/vendor/Sortable.min.js"></script>
+    <!-- Components Loader -->
+    <script src="/assets/js/components.js"></script>
+    <!-- Main JS -->
+    <script src="/assets/js/main.js"></script>
+
+
+
+
+
+
+
+
+
+
+    <!-- js -->
+    <!-- Modernizer JS -->
+    <script src="/assets/js/vendor/modernizr.min.js"></script>
+    <!-- jQuery JS -->
+    <script src="/assets/js/vendor/jquery.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="/assets/js/vendor/bootstrap.min.js"></script>
+    <!-- sal.js -->
+    <script src="/assets/js/vendor/sal.js"></script>
+    <!-- Dark Mode Switcher -->
+    <script src="/assets/js/vendor/js.cookie.js"></script>
+    <script src="/assets/js/vendor/jquery.style.switcher.js"></script>
+    <script src="/assets/js/vendor/swiper.js"></script>
+    <script src="/assets/js/vendor/jquery-appear.js"></script>
+    <script src="/assets/js/vendor/odometer.js"></script>
+    <script src="/assets/js/vendor/backtotop.js"></script>
+    <script src="/assets/js/vendor/isotop.js"></script>
+    <script src="/assets/js/vendor/imageloaded.js"></script>
+    <script src="/assets/js/vendor/wow.js"></script>
+    <script src="/assets/js/vendor/waypoint.min.js"></script>
+    <script src="/assets/js/vendor/easypie.js"></script>
+    <script src="/assets/js/vendor/text-type.js"></script>
+    <script src="/assets/js/vendor/jquery-one-page-nav.js"></script>
+    <script src="/assets/js/vendor/bootstrap-select.min.js"></script>
+    <script src="/assets/js/vendor/jquery-ui.js"></script>
+    <script src="/assets/js/vendor/magnify-popup.min.js"></script>
+    <script src="/assets/js/vendor/paralax-scroll.js"></script>
+    <script src="/assets/js/vendor/paralax.min.js"></script>
+    <script src="/assets/js/vendor/countdown.js"></script>
+    <script src="/assets/js/vendor/plyr.js"></script>
+    <script src="/assets/js/vendor/jodit.min.js"></script>
+    <script src="/assets/js/vendor/Sortable.min.js"></script>
+    <!-- Main JS -->
+    <script src="/assets/js/main.js"></script>
+</body>
+
+</html>
