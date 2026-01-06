@@ -5,19 +5,34 @@
 (function () {
     'use strict';
 
-    // Determine base path based on current location depth
-    var basePath = window.location.pathname.split('/').length > 2 ? '../' : '';
-    // Adjust for file:// protocol where pathname might be absolute
+    // Determine base path - detect if we're in a subdirectory
+    var basePath = '';
+    var currentPath = window.location.pathname;
+    
+    // Check if in subdirectory (courses/ or competitions/)
+    if (currentPath.includes('/courses/') || currentPath.includes('/competitions/')) {
+        basePath = '../';
+    }
+    
+    // For file:// protocol (local testing)
     if (window.location.protocol === 'file:') {
-        if (window.location.href.includes('/courses/') || window.location.href.includes('/competitions/')) {
+        var filePath = window.location.href;
+        if (filePath.includes('/courses/') || filePath.includes('/competitions/')) {
             basePath = '../';
         }
     }
 
-    // Helper to fix paths in loaded HTML
+    // Helper to fix paths in loaded HTML - only adjust paths that need adjustment
     function fixPaths(html) {
-        if (!basePath) return html;
-        return html.replace(/src="assets\//g, 'src="' + basePath + 'assets/')
+        if (!basePath) {
+            // At root level - paths in components already use ./
+            return html;
+        }
+        // In subdirectory - need to convert ./ to ../
+        return html
+            .replace(/src="\.\//g, 'src="' + basePath)
+            .replace(/href="\.\//g, 'href="' + basePath)
+            .replace(/src="assets\//g, 'src="' + basePath + 'assets/')
             .replace(/href="assets\//g, 'href="' + basePath + 'assets/')
             .replace(/href="index.html"/g, 'href="' + basePath + 'index.html"')
             .replace(/href="courses.html"/g, 'href="' + basePath + 'courses.html"')
@@ -31,19 +46,29 @@
     // Load component HTML into target element
     function loadComponent(url, targetId, callback) {
         var target = document.getElementById(targetId);
-        if (!target) return;
+        if (!target) {
+            console.warn('Target element not found:', targetId);
+            return;
+        }
 
-        fetch(basePath + url)
+        var fullUrl = basePath + url;
+        
+        fetch(fullUrl)
             .then(function (response) {
-                if (!response.ok) throw new Error('Failed to load: ' + url);
+                if (!response.ok) {
+                    throw new Error('Failed to load: ' + url + ' (Status: ' + response.status + ')');
+                }
                 return response.text();
             })
             .then(function (html) {
-                target.innerHTML = fixPaths(html);
+                // Fix paths in the loaded HTML
+                var fixedHtml = fixPaths(html);
+                target.innerHTML = fixedHtml;
                 if (callback) callback();
             })
             .catch(function (error) {
                 console.error('Component load error:', error);
+                target.innerHTML = '<p>Error loading component. Check console for details.</p>';
             });
     }
 
