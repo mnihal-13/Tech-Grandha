@@ -50782,3 +50782,6 @@ input[type="password"]::-webkit-password-reveal-button {
     margin-top: 15px;
   }
 }
+
+/* Enforce Course Card Image Dimensions */
+.rbt-card .rbt-card-img img { width: 100%; height: 234px; object-fit: cover; }
