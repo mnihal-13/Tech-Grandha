@@ -57,6 +57,9 @@
       eduJs.searchValue();
       eduJs.lessonToggle();
       eduJs.categoryMenuHover2();
+      eduJs.categoryMenuHover2();
+      eduJs.teacherProcessAnimation(); // new added
+      eduJs.virtualClassroomAnimation(); // new added
       eduJs.typeField(); // new added
       eduJs.countDown(); // new added
       eduJs.editor(); // new added
@@ -64,6 +67,8 @@
       eduJs.dnd(); // new added
       eduJs.multiStepForm(); // new added
       eduJs.cursorFollow(); // new added
+      eduJs.programOfferingsAnimation(); // new added
+      eduJs.programOfferingsSwiper(); // new added
       // Initialize parallax scroll for data-parallax elements
       if (typeof ParallaxScroll !== 'undefined') {
         ParallaxScroll.init();
@@ -1647,6 +1652,186 @@
         }
       );
     },
+    teacherProcessAnimation: function () {
+      if ($('.teacher-process-section').length) {
+        gsap.registerPlugin(ScrollTrigger);
+
+        const timeline = document.getElementById('process-timeline');
+        const progress = document.getElementById('timeline-progress');
+        const steps = document.querySelectorAll('.process-step');
+
+        if (timeline && progress) {
+          // Animate timeline progress
+          gsap.to(progress, {
+            height: '100%',
+            ease: 'none',
+            scrollTrigger: {
+              trigger: timeline,
+              start: 'top 60%',
+              end: 'bottom 40%',
+              scrub: 1
+            }
+          });
+        }
+
+        if (steps.length) {
+          // Animate each step
+          steps.forEach((step, index) => {
+            const number = step.querySelector('.step-number');
+            const content = step.querySelector('.step-content');
+            const isLeft = step.classList.contains('left');
+
+            // Step number animation
+            if (number) {
+              gsap.to(number, {
+                opacity: 1,
+                scale: 1,
+                duration: 0.6,
+                ease: 'back.out(1.7)',
+                scrollTrigger: {
+                  trigger: step,
+                  start: 'top 70%',
+                  toggleActions: 'play none play reverse'
+                }
+              });
+            }
+
+            // Content card animation
+            if (content) {
+              const startX = isLeft ? -50 : 50;
+              gsap.fromTo(content,
+                { x: startX },
+                {
+                  x: 0,
+                  duration: 0.8,
+                  ease: 'power3.out',
+                  scrollTrigger: {
+                    trigger: step,
+                    start: 'top 70%',
+                    toggleActions: 'play none play reverse'
+                  }
+                }
+              );
+
+              // Icon pulse on scroll into view
+              const icon = content.querySelector('.step-icon');
+              if (icon) {
+                gsap.fromTo(icon,
+                  { scale: 0, rotation: -180 },
+                  {
+                    scale: 1,
+                    rotation: 0,
+                    duration: 0.6,
+                    delay: 0.3,
+                    ease: 'back.out(2)',
+                    scrollTrigger: {
+                      trigger: step,
+                      start: 'top 70%',
+                      toggleActions: 'play none play reverse'
+                    }
+                  }
+                );
+              }
+            }
+          });
+        }
+      }
+    },
+
+    virtualClassroomAnimation: function () {
+      if ($('.virtual-classroom-section').length) {
+        gsap.registerPlugin(ScrollTrigger);
+        const cards = document.querySelectorAll('.classroom-card');
+        if (cards.length) {
+          gsap.fromTo(cards,
+            {
+              y: 50,
+              opacity: 0
+            },
+            {
+              y: 0,
+              opacity: 1,
+              duration: 0.8,
+              stagger: 0.15,
+              ease: "power3.out",
+              scrollTrigger: {
+                trigger: ".classroom-grid",
+                start: "top 80%",
+                toggleActions: "play none play reverse"
+              }
+            }
+          );
+        }
+      }
+    },
+    // GSAP Animation for Program Offerings Table
+    programOfferingsAnimation: function () {
+      if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+        gsap.registerPlugin(ScrollTrigger);
+
+        const rows = document.querySelectorAll('.offering-row');
+
+        if (rows.length > 0) {
+          rows.forEach((row, index) => {
+            const icons = row.querySelectorAll('.offering-icon');
+
+            // Initial state setup to ensure smooth animation
+            gsap.set(icons, { opacity: 0, scale: 0, rotation: -180 });
+
+            gsap.to(icons, {
+              opacity: 1,
+              scale: 1,
+              rotation: 0,
+              duration: 0.8,
+              stagger: 0.15,
+              ease: 'elastic.out(1, 0.5)', // Premium "pop" effect
+              scrollTrigger: {
+                trigger: row,
+                start: 'top 85%',
+                toggleActions: 'play none none reverse'
+              }
+            });
+          });
+        }
+      }
+    },
+    // Program Offerings Swiper Carousel
+    programOfferingsSwiper: function () {
+      const swiperContainer = document.querySelector('.program-offerings-swiper-v2');
+      if (swiperContainer && typeof Swiper !== 'undefined') {
+        new Swiper('.program-offerings-swiper-v2', {
+          slidesPerView: 1,
+          spaceBetween: 30,
+          loop: true,
+          autoplay: {
+            delay: 4000,
+            disableOnInteraction: false,
+          },
+          pagination: {
+            el: '.program-pagination',
+            clickable: true,
+          },
+          navigation: {
+            nextEl: '.program-nav-next',
+            prevEl: '.program-nav-prev',
+          },
+          breakpoints: {
+            576: {
+              slidesPerView: 2,
+            },
+            992: {
+              slidesPerView: 3,
+            },
+            1200: {
+              slidesPerView: 4,
+            },
+          },
+        });
+      }
+    },
   };
   eduJs.i();
 })(window, document, jQuery);
+
+
+

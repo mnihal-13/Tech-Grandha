@@ -8,12 +8,12 @@
     // Determine base path - detect if we're in a subdirectory
     var basePath = '';
     var currentPath = window.location.pathname;
-    
+
     // Check if in subdirectory (courses/ or competitions/)
     if (currentPath.includes('/courses/') || currentPath.includes('/competitions/')) {
         basePath = '../';
     }
-    
+
     // For file:// protocol (local testing)
     if (window.location.protocol === 'file:') {
         var filePath = window.location.href;
@@ -52,7 +52,7 @@
         }
 
         var fullUrl = basePath + url;
-        
+
         fetch(fullUrl)
             .then(function (response) {
                 if (!response.ok) {
@@ -91,28 +91,6 @@
             });
         }
 
-        // Theme switcher
-        var themeButtons = document.querySelectorAll('.setColor');
-        themeButtons.forEach(function (btn) {
-            btn.addEventListener('click', function () {
-                var theme = this.getAttribute('data-theme');
-                document.documentElement.setAttribute('data-theme', theme);
-                localStorage.setItem('theme', theme);
-
-                // Update active state
-                themeButtons.forEach(b => b.classList.remove('active'));
-                this.classList.add('active');
-            });
-        });
-
-        // Apply saved theme
-        var savedTheme = localStorage.getItem('theme') || 'light';
-        if (savedTheme) {
-            document.documentElement.setAttribute('data-theme', savedTheme);
-            // Set active class
-            var activeBtn = document.querySelector('.setColor[data-theme="' + savedTheme + '"]');
-            if (activeBtn) activeBtn.classList.add('active');
-        }
 
         // Re-trigger parallax for footer if available
         if (typeof ParallaxScroll !== 'undefined') {
@@ -167,6 +145,11 @@
         function checkAllLoaded() {
             if (headerLoaded && footerLoaded) {
                 reinitializeHandlers();
+
+                // Load Chat Widget Script dynamically
+                var script = document.createElement('script');
+                script.src = basePath + 'assets/js/chat-widget.js';
+                document.body.appendChild(script);
             }
         }
 

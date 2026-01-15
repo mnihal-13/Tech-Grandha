@@ -17,10 +17,13 @@ jQuery(document).ready(function ($) {
     initHeadline();
 
     function initHeadline() {
+        console.log('initHeadline called');
         //insert <i> element for each letter of a changing word
         singleLetters($('.cd-headline.letters').find('b'));
         //initialise headline animation
-        animateHeadline($('.cd-headline'));
+        var headlines = $('.cd-headline');
+        console.log('Found headlines:', headlines.length);
+        animateHeadline(headlines);
     }
 
     function singleLetters($words) {
@@ -41,6 +44,7 @@ jQuery(document).ready(function ($) {
         var duration = animationDelay;
         $headlines.each(function () {
             var headline = $(this);
+            console.log('Animating headline:', headline);
 
             if (headline.hasClass('loading-bar')) {
                 duration = barAnimationDelay;
@@ -50,6 +54,7 @@ jQuery(document).ready(function ($) {
             } else if (headline.hasClass('clip')) {
                 var spanWrapper = headline.find('.cd-words-wrapper'),
                     newWidth = spanWrapper.width() + 10
+                console.log('Clip effect init. spanWrapper width:', spanWrapper.width(), 'newWidth:', newWidth);
                 spanWrapper.css('width', newWidth);
             } else if (!headline.hasClass('type')) {
                 //assign to .cd-words-wrapper the width of its longest word
